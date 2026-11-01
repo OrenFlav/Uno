@@ -30,7 +30,7 @@ const confessions = [
 ];
 
 // ─────────────────────────────────────────────────────────────
-// Everything below builds the page. You don't need to edit it.
+// Everything below builds the page.
 // ─────────────────────────────────────────────────────────────
 const list = document.getElementById("list");
 
@@ -55,15 +55,14 @@ confessions.forEach((c, i) => {
     qrBox.setAttribute("aria-label", "Open " + c.title);
   }
 
-  if (ready && typeof QRCode !== "undefined") {
-    new QRCode(qrBox, {
-      text: c.url,
-      width: 180,
-      height: 180,
-      colorDark: "#5a2d17",
-      colorLight: "#ffffff",
-      correctLevel: QRCode.CorrectLevel.M,
-    });
+  if (ready && typeof qrcode !== "undefined") {
+    // Draws a crisp SVG QR (works on every phone, no canvas needed)
+    const qr = qrcode(0, "M");
+    qr.addData(c.url);
+    qr.make();
+    qrBox.innerHTML = qr
+      .createSvgTag({ cellSize: 4, margin: 8, scalable: true })
+      .replace('fill="black"', 'fill="#5a2d17"');
   } else {
     qrBox.textContent = ready ? "QR unavailable" : "link not set yet";
   }
@@ -94,4 +93,75 @@ confessions.forEach((c, i) => {
   }
 
   list.appendChild(li);
+});
+
+// ─────────────────────────────────────────────────────────────
+// BACKGROUND MUSIC  (audio/statue.mp3)
+// Phones block sound until the visitor taps something, so the
+// song starts on her first tap anywhere, and the button lets her
+// pause / resume at any time.
+// ─────────────────────────────────────────────────────────────
+const bgm = document.getElementById("bgm");
+const musicBtn = document.getElementById("musicBtn");
+let playing = false;
+let userPaused = false;
+
+bgm.volume = 0.5; // 0 = silent, 1 = full volume
+
+function updateMusicUI() {
+  musicBtn.classList.toggle("on", playing);
+}
+
+function startMusic() {
+  return bgm
+    .play()
+    .then(() => {
+      playing = true;
+      updateMusicUI();
+    })
+    .catch(() => {
+      playing = false;
+      updateMusicUI();
+    });
+}
+
+function stopMusic() {
+  bgm.pause();
+  playing = false;
+  updateMusicUI();
+}
+
+// Only show the button if the mp3 actually loads
+bgm.addEventListener(
+  "canplay",
+  () => {
+    musicBtn.hidden = false;
+  },
+  { once: true },
+);
+bgm.addEventListener("error", () => {
+  musicBtn.hidden = true;
+  console.warn("Music file not found: put it at audio/Statue.mp3");
+});
+
+musicBtn.addEventListener("click", (e) => {
+  e.stopPropagation(); // don't trigger the "first tap" starter
+  if (playing) {
+    userPaused = true;
+    stopMusic();
+  } else {
+    userPaused = false;
+    startMusic();
+  }
+});
+
+// Try autoplay (works on some desktops); otherwise start on her first tap
+startMusic().then(() => {
+  if (!playing) {
+    const firstTap = () => {
+      if (!userPaused) startMusic();
+      if (playing) document.removeEventListener("click", firstTap);
+    };
+    document.addEventListener("click", firstTap);
+  }
 });
