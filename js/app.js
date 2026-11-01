@@ -21,6 +21,12 @@ const confessions = [
     note: "shet shet nakita ako",
     url: "https://orenflav.github.io/Uno_p3/",
   },
+  {
+    part: "Part 4",
+    title: "Hopia like it",
+    note: "mwehehe",
+    url: "https://orenflav.github.io/Uno_p4/",
+  },
 ];
 
 // ─────────────────────────────────────────────────────────────
