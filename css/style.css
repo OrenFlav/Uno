@@ -1,23 +1,28 @@
 /* ═══════════════════════════════════════════════════════════
    CONFESSION LIST — style.css
    Theme: simple + peach
-   ✏️ To recolor everything, change the values in :root.
 ═══════════════════════════════════════════════════════════ */
 
 :root {
-  --bg:      #fff1e6;   /* page background  */
-  --card:    #ffffff;
-  --peach:   #ffb08a;   /* accents          */
-  --peach-d: #f48b62;   /* button           */
-  --peach-l: #ffe0cc;   /* soft borders     */
-  --text:    #5a2d17;
-  --muted:   #a77a64;
+  --bg: #fff1e6; /* page background  */
+  --card: #ffffff;
+  --peach: #ffb08a; /* accents          */
+  --peach-d: #f48b62; /* button           */
+  --peach-l: #ffe0cc; /* soft borders     */
+  --text: #5a2d17;
+  --muted: #a77a64;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   background: linear-gradient(180deg, #ffe7d6 0%, var(--bg) 40%);
   background-attachment: fixed;
   color: var(--text);
@@ -31,13 +36,32 @@ body {
 }
 
 /* ── HEADER ──────────────────────────────────────────────── */
-.head { text-align: center; margin-bottom: 34px; }
-.head-emoji { font-size: 2.6rem; margin-bottom: 6px; }
-.head h1 { font-size: clamp(1.8rem, 7vw, 2.3rem); font-weight: 800; letter-spacing: -.3px; }
-.head p  { color: var(--muted); font-size: .98rem; margin-top: 6px; }
+.head {
+  text-align: center;
+  margin-bottom: 34px;
+}
+.head-emoji {
+  font-size: 2.6rem;
+  margin-bottom: 6px;
+}
+.head h1 {
+  font-size: clamp(1.8rem, 7vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+.head p {
+  color: var(--muted);
+  font-size: 0.98rem;
+  margin-top: 6px;
+}
 
 /* ── LIST ────────────────────────────────────────────────── */
-.list { list-style: none; display: flex; flex-direction: column; gap: 22px; }
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
 
 .item {
   position: relative;
@@ -46,22 +70,29 @@ body {
   border-radius: 24px;
   padding: 30px 22px 24px;
   text-align: center;
-  box-shadow: 0 8px 24px rgba(244,139,98,.14);
-  animation: rise .6s ease both;
+  box-shadow: 0 8px 24px rgba(244, 139, 98, 0.14);
+  animation: rise 0.6s ease both;
 }
 
 @keyframes rise {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .badge {
   position: absolute;
-  top: -13px; left: 50%;
+  top: -13px;
+  left: 50%;
   transform: translateX(-50%);
   background: var(--peach);
   color: #fff;
-  font-size: .75rem;
+  font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -81,31 +112,46 @@ body {
   border: 2px solid var(--peach-l);
   border-radius: 18px;
   padding: 14px;
-  transition: transform .2s, box-shadow .2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   text-decoration: none;
 }
 
-a.qr-box { cursor: pointer; }
+a.qr-box {
+  cursor: pointer;
+}
 a.qr-box:hover {
   transform: scale(1.04);
-  box-shadow: 0 8px 22px rgba(244,139,98,.3);
+  box-shadow: 0 8px 22px rgba(244, 139, 98, 0.3);
 }
-a.qr-box:active { transform: scale(.98); }
+a.qr-box:active {
+  transform: scale(0.98);
+}
 
-/* the library draws both a canvas and an img — show only one */
-.qr-box canvas { display: none !important; }
-.qr-box img    { display: block; width: 100% !important; height: 100% !important; }
+.qr-box svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 
 .qr-box.empty {
   border-style: dashed;
   color: var(--muted);
-  font-size: .85rem;
+  font-size: 0.85rem;
   font-weight: 600;
 }
 
 /* ── TEXT + BUTTON ───────────────────────────────────────── */
-.item h2 { font-size: 1.3rem; font-weight: 800; }
-.note    { color: var(--muted); font-size: .92rem; margin-top: 4px; }
+.item h2 {
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+.note {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin-top: 4px;
+}
 
 .btn {
   display: inline-block;
@@ -113,17 +159,105 @@ a.qr-box:active { transform: scale(.98); }
   background: var(--peach-d);
   color: #fff;
   font-weight: 700;
-  font-size: .95rem;
+  font-size: 0.95rem;
   text-decoration: none;
   padding: 11px 28px;
   border-radius: 99px;
-  transition: transform .15s, box-shadow .15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
 }
-.btn:hover  { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(244,139,98,.4); }
-.btn:active { transform: scale(.97); }
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(244, 139, 98, 0.4);
+}
+.btn:active {
+  transform: scale(0.97);
+}
 
-.foot { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 36px; }
+.foot {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 36px;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── MUSIC BUTTON ────────────────────────────────────────── */
+.music {
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: #fff;
+  color: var(--text);
+  border: 2px solid var(--peach-l);
+  border-radius: 99px;
+  padding: 9px 16px 9px 13px;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(244, 139, 98, 0.25);
+  transition:
+    transform 0.15s,
+    border-color 0.2s;
+}
+.music[hidden] {
+  display: none;
+}
+.music:hover {
+  transform: translateY(-2px);
+  border-color: var(--peach);
+}
+.music:active {
+  transform: scale(0.96);
+}
+
+/* little equalizer bars — they dance only while music plays */
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+.bars i {
+  display: block;
+  width: 3px;
+  height: 4px;
+  background: var(--peach-d);
+  border-radius: 2px;
+}
+.music.on .bars i {
+  animation: eq 0.8s ease-in-out infinite;
+}
+.music.on .bars i:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.music.on .bars i:nth-child(3) {
+  animation-delay: 0.4s;
+}
+@keyframes eq {
+  0%,
+  100% {
+    height: 4px;
+  }
+  50% {
+    height: 14px;
+  }
+}
+
+@media (max-width: 420px) {
+  .music-text {
+    font-size: 0.76rem;
+  }
 }
